@@ -142,7 +142,7 @@
 								"url": "https://prod-04.eastus.logic.azure.com:443/workflows/5477087f3b5a4f8c96b8dfd686560872/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=08VXG5WT5N1kSxYF8H52-lBRsQkAZj_tOwNloRgV4pQ",
 								"method": "POST",
 								"body": {
-									"value": "{\n\"title\":\"PIPELINE RUN SUCCESSFUL\",\n\"table\":\"@{item().Table_name}\"\n\"message\":\"@{activity('Export Table').error.message}\",\n\"color\":\"Red\",\n\"datafactoryname\":\"@{pipeline().DataFactory}\",\n\"pipelinename\":\"@{pipeline().Pipeline}\",\n\"runid\":\"@{pipeline().RunId}\"\n}",
+									"value": "{\n\"title\":\"PIPELINE RUN SUCCESSFUL\",\n\"table\":\"@{item().Table_name}\",\n\"message\":\"@{activity('Export Table').error.message}\",\n\"color\":\"Red\",\n\"datafactoryname\":\"@{pipeline().DataFactory}\",\n\"pipelinename\":\"@{pipeline().Pipeline}\",\n\"runid\":\"@{pipeline().RunId}\"\n}",
 									"type": "Expression"
 								}
 							}
@@ -163,7 +163,7 @@
 								"url": "https://prod-04.eastus.logic.azure.com:443/workflows/5477087f3b5a4f8c96b8dfd686560872/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=08VXG5WT5N1kSxYF8H52-lBRsQkAZj_tOwNloRgV4pQ",
 								"method": "POST",
 								"body": {
-									"value": "{\n\"title\":\"PIPELINE RUN SUCCESSFUL\",\n\"table\":\"@{item().Table_name}\"\n\"message\":\"SUCCESSFUL\",\n\"color\":\"Green\",\n\"datafactoryname\":\"@{pipeline().DataFactory}\",\n\"pipelinename\":\"@{pipeline().Pipeline}\",\n\"runid\":\"@{pipeline().RunId}\"\n}",
+									"value": "{\n\"title\":\"PIPELINE RUN SUCCESSFUL\",\n\"table\":\"@{item().Table_name}\",\n\"message\":\"SUCCESSFUL\",\n\"color\":\"Green\",\n\"datafactoryname\":\"@{pipeline().DataFactory}\",\n\"pipelinename\":\"@{pipeline().Pipeline}\",\n\"runid\":\"@{pipeline().RunId}\"\n}",
 									"type": "Expression"
 								}
 							}
