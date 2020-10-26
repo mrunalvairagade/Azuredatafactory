@@ -1,0 +1,39 @@
+{
+	"name": "CSV_Infobiz_tables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"CSVFileName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Infobiz"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().CSVFileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@{formatDateTime(getFutureTime(0,'Day'),'yyyy')}/@{formatDateTime(getFutureTime(0,'Day'),'MM')}/@{formatDateTime(getFutureTime(0,'Day'),'yyyy-MM-dd')}",
+					"type": "Expression"
+				},
+				"fileSystem": "infobiz"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

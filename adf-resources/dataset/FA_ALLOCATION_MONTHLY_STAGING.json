@@ -1,0 +1,134 @@
+{
+	"name": "FA_ALLOCATION_MONTHLY_STAGING",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "MONTHLY_ALC_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ALC_END_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "UTILIZATION",
+				"type": "decimal",
+				"precision": 19,
+				"scale": 2
+			},
+			{
+				"name": "ALLOCATED_HOURS",
+				"type": "decimal",
+				"precision": 19,
+				"scale": 2
+			},
+			{
+				"name": "ALC_START_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ALC_TYPE",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "COMMENTS",
+				"type": "varchar"
+			},
+			{
+				"name": "CREATED_BY",
+				"type": "varchar"
+			},
+			{
+				"name": "CREATED_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "MODIFIED_BY",
+				"type": "varchar"
+			},
+			{
+				"name": "MODIFIED_DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ALC_STATUS",
+				"type": "varchar"
+			},
+			{
+				"name": "MONTH_KEY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MONTH_DESC",
+				"type": "varchar"
+			},
+			{
+				"name": "COMPANY_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PROJECT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TREQ_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "SOW_DETAIL_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CMS_DETAIL_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RESOURCE_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ALC_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BUCKET_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LOAD_TIMESTAMP",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "FA_ALLOCATION_MONTHLY_STAGING"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

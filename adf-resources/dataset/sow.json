@@ -1,0 +1,184 @@
+{
+	"name": "sow",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Infobiz96",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "sowId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "clientPo",
+				"type": "varchar"
+			},
+			{
+				"name": "comments",
+				"type": "varchar"
+			},
+			{
+				"name": "cost",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "createdBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createdDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "currencyId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "daysInMonth",
+				"type": "varchar"
+			},
+			{
+				"name": "docPath",
+				"type": "varchar"
+			},
+			{
+				"name": "documentTypeId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "externalSowNo",
+				"type": "varchar"
+			},
+			{
+				"name": "flatDiscountPer",
+				"type": "decimal",
+				"precision": 4,
+				"scale": 2
+			},
+			{
+				"name": "margin",
+				"type": "decimal",
+				"precision": 19,
+				"scale": 2
+			},
+			{
+				"name": "modifiedBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "modifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "offshoreCost",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "offshoreRevenue",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "onshoreCost",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "onshoreRevenue",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "projectId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "revenue",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "sowEndDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "sowNo",
+				"type": "varchar"
+			},
+			{
+				"name": "sowStartDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "status",
+				"type": "varchar"
+			},
+			{
+				"name": "uomId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "totalContractValue",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "opportunityId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "poTotalValue",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "COA_ProjectSOW",
+				"type": "varchar"
+			},
+			{
+				"name": "COA_Project_SOW",
+				"type": "varchar"
+			},
+			{
+				"name": "baseContractValue",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "COA_Description",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sow"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

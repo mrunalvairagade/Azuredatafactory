@@ -1,0 +1,36 @@
+{
+	"name": "fa_allocation_monthly_staging",
+	"properties": {
+		"activities": [
+			{
+				"name": "df_fa_allocation_monthly_staging",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_fa_allocation_monthly_staging",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "Infobi_infobi_prod_TGT"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-10-03T07:58:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

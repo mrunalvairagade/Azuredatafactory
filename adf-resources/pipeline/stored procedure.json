@@ -1,0 +1,33 @@
+{
+	"name": "stored procedure",
+	"properties": {
+		"activities": [
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[SelectAllEmployee]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "Infobi_infobi_prod_TGT"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-10-22T08:31:26Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

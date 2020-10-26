@@ -1,0 +1,133 @@
+{
+	"name": "DATALAKE_DAILY",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": " select * from infobiz.INFORMATION_SCHEMA.TABLES\nwhere Table_name in ('invoices','tsnonwork','tssubmit','tstimesheet','projectTerms','projectType','sow','sowDetail','sowMilestone'\n,'taskCenter','deCoverage','deProjectMetrics','riskCategory','gtp','accountInfo','allocation','monthly_allocation','treq','isow'\n,'isowDetail','isowMilestone','monthlySOWRoleWiseRevenue_View','monthlyCMSForecastforMilestone_View','po','monthlyCMSForecastforTM_View'\n,'tstime','monthlySOWRevenueforMilestone_View','revenueProjection','monthlySOWRevenueforTM_View','deAppreciation','associateSkills'\n,'cms','deComplaint','cmsDetail','deMsr','roles','tsapproval','deValueAdd','deGovernance','invoiceDetail','tsitem','deWsr','invoiceInfo'\n,'tsitemhours')",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "Infobiz_tables",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "For Each Table",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Export Table",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"sqlReaderQuery": {
+										"value": "SELECT\n * FROM\n [@{item().table_schema}].[@{item().table_name}] \n where year(createddate)*10000+month(createdDate)*100+day(createdDate) = 20201009",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "Generic_Infobiz_tables",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableName": {
+											"value": "@item().table_name",
+											"type": "Expression"
+										},
+										"SchemaName": {
+											"value": "@item().table_schema",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "CSV_Infobiz_tables",
+									"type": "DatasetReference",
+									"parameters": {
+										"CSVFileName": {
+											"value": "@concat(item().table_schema,'_',item().table_name,'.csv')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "Infobiz"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-10-26T03:54:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

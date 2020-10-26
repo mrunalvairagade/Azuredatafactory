@@ -1,0 +1,61 @@
+{
+	"name": "df_fa_allocation_monthly_staging",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "blob_monthly_allocation",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "faallocationmonthlystaging",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "FA_ALLOCATION_MONTHLY_STAGING",
+						"type": "DatasetReference"
+					},
+					"name": "TGTfaallocationmonthlystaging"
+				},
+				{
+					"dataset": {
+						"referenceName": "FA_ALLOCATION_MONTHLY_STAGING",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AlterRow1"
+				},
+				{
+					"name": "Exists1"
+				},
+				{
+					"name": "Exists2"
+				},
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "DerivedColumn2"
+				},
+				{
+					"name": "Filter1"
+				}
+			],
+			"script": "source(output(\n\t\t{_corrupt_record} as string,\n\t\talcEndDate as string,\n\t\talcFte as double,\n\t\talcHrs as double,\n\t\talcId as short,\n\t\talcStartDate as string,\n\t\talcStatus as string,\n\t\talcType as short,\n\t\tbucketId as short,\n\t\tcmsDetailId as string,\n\t\tcomments as string,\n\t\tcreatedBy as short,\n\t\tcreatedDate as string,\n\t\tmodifiedBy as string,\n\t\tmodifiedDate as string,\n\t\tmonthlyAlcId as integer,\n\t\tprdId as boolean,\n\t\tprdMonth as short,\n\t\tprdName as string,\n\t\tprdYear as short,\n\t\tprojectId as short,\n\t\trequisitionId as string,\n\t\tsowDetailId as short,\n\t\tuid as short\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource(output(\n\t\tMONTHLY_ALC_ID as integer,\n\t\tALC_END_DATE as timestamp,\n\t\tUTILIZATION as decimal(19,2),\n\t\tALLOCATED_HOURS as decimal(19,2),\n\t\tALC_START_DATE as timestamp,\n\t\tALC_TYPE as integer,\n\t\tCOMMENTS as string,\n\t\tCREATED_BY as string,\n\t\tCREATED_DATE as timestamp,\n\t\tMODIFIED_BY as string,\n\t\tMODIFIED_DATE as timestamp,\n\t\tALC_STATUS as string,\n\t\tMONTH_KEY as integer,\n\t\tMONTH_DESC as string,\n\t\tCOMPANY_ID as integer,\n\t\tPROJECT_ID as integer,\n\t\tTREQ_ID as string,\n\t\tSOW_DETAIL_ID as integer,\n\t\tCMS_DETAIL_ID as integer,\n\t\tRESOURCE_ID as integer,\n\t\tALC_ID as integer,\n\t\tBUCKET_ID as integer,\n\t\tLOAD_TIMESTAMP as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source2\nExists1 alterRow(updateIf(1==1)) ~> AlterRow1\nsource1, source2 exists(monthlyAlcId == MONTHLY_ALC_ID,\n\tnegate:false,\n\tbroadcast: 'auto')~> Exists1\nsource1, source2 exists(monthlyAlcId == MONTHLY_ALC_ID,\n\tnegate:true,\n\tbroadcast: 'auto')~> Exists2\nAlterRow1 derive(monthkey = prdYear*100+prdMonth,\n\t\tloadtimestamp = currentTimestamp(),\n\t\tcompanyid = 1,\n\t\tssmonthlyalcid = iif(isNull(monthlyAlcId),0, monthlyAlcId)) ~> DerivedColumn1\nExists2 derive(monthkey = prdYear*100+prdMonth,\n\t\tloadtimestamp = currentTimestamp(),\n\t\tcompanyid = 1,\n\t\tssmonthlyalcid = iif(isNull(monthlyAlcId),0,monthlyAlcId)) ~> DerivedColumn2\nDerivedColumn2 filter(monthlyAlcId !=0) ~> Filter1\nDerivedColumn1 sink(input(\n\t\tMONTHLY_ALC_ID as integer,\n\t\tALC_END_DATE as timestamp,\n\t\tUTILIZATION as decimal(19,2),\n\t\tALLOCATED_HOURS as decimal(19,2),\n\t\tALC_START_DATE as timestamp,\n\t\tALC_TYPE as integer,\n\t\tCOMMENTS as string,\n\t\tCREATED_BY as string,\n\t\tCREATED_DATE as timestamp,\n\t\tMODIFIED_BY as string,\n\t\tMODIFIED_DATE as timestamp,\n\t\tALC_STATUS as string,\n\t\tMONTH_KEY as integer,\n\t\tMONTH_DESC as string,\n\t\tCOMPANY_ID as integer,\n\t\tPROJECT_ID as integer,\n\t\tTREQ_ID as string,\n\t\tSOW_DETAIL_ID as integer,\n\t\tCMS_DETAIL_ID as integer,\n\t\tRESOURCE_ID as integer,\n\t\tALC_ID as integer,\n\t\tBUCKET_ID as integer,\n\t\tLOAD_TIMESTAMP as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:true,\n\tupsertable:false,\n\tkeys:['MONTHLY_ALC_ID'],\n\tformat: 'table',\n\tmapColumn(\n\t\tMONTHLY_ALC_ID = ssmonthlyalcid,\n\t\tALC_END_DATE = alcEndDate,\n\t\tUTILIZATION = alcFte,\n\t\tALLOCATED_HOURS = alcHrs,\n\t\tALC_START_DATE = alcStartDate,\n\t\tALC_TYPE = alcType,\n\t\tCOMMENTS = comments,\n\t\tCREATED_BY = createdBy,\n\t\tCREATED_DATE = createdDate,\n\t\tMODIFIED_BY = modifiedBy,\n\t\tMODIFIED_DATE = modifiedDate,\n\t\tALC_STATUS = alcStatus,\n\t\tMONTH_KEY = monthkey,\n\t\tMONTH_DESC = prdMonth,\n\t\tCOMPANY_ID = companyid,\n\t\tPROJECT_ID = projectId,\n\t\tTREQ_ID = requisitionId,\n\t\tSOW_DETAIL_ID = sowDetailId,\n\t\tCMS_DETAIL_ID = cmsDetailId,\n\t\tRESOURCE_ID = uid,\n\t\tALC_ID = alcId,\n\t\tBUCKET_ID = bucketId,\n\t\tLOAD_TIMESTAMP = loadtimestamp\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> TGTfaallocationmonthlystaging\nFilter1 sink(input(\n\t\tMONTHLY_ALC_ID as integer,\n\t\tALC_END_DATE as timestamp,\n\t\tUTILIZATION as decimal(19,2),\n\t\tALLOCATED_HOURS as decimal(19,2),\n\t\tALC_START_DATE as timestamp,\n\t\tALC_TYPE as integer,\n\t\tCOMMENTS as string,\n\t\tCREATED_BY as string,\n\t\tCREATED_DATE as timestamp,\n\t\tMODIFIED_BY as string,\n\t\tMODIFIED_DATE as timestamp,\n\t\tALC_STATUS as string,\n\t\tMONTH_KEY as integer,\n\t\tMONTH_DESC as string,\n\t\tCOMPANY_ID as integer,\n\t\tPROJECT_ID as integer,\n\t\tTREQ_ID as string,\n\t\tSOW_DETAIL_ID as integer,\n\t\tCMS_DETAIL_ID as integer,\n\t\tRESOURCE_ID as integer,\n\t\tALC_ID as integer,\n\t\tBUCKET_ID as integer,\n\t\tLOAD_TIMESTAMP as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tMONTHLY_ALC_ID = ssmonthlyalcid,\n\t\tALC_END_DATE = alcEndDate,\n\t\tUTILIZATION = alcFte,\n\t\tALLOCATED_HOURS = alcHrs,\n\t\tALC_START_DATE = alcStartDate,\n\t\tALC_TYPE = alcType,\n\t\tCOMMENTS = comments,\n\t\tCREATED_BY = createdBy,\n\t\tCREATED_DATE = createdDate,\n\t\tMODIFIED_BY = modifiedBy,\n\t\tMODIFIED_DATE = modifiedDate,\n\t\tALC_STATUS = alcStatus,\n\t\tMONTH_KEY = monthkey,\n\t\tMONTH_DESC = prdMonth,\n\t\tCOMPANY_ID = companyid,\n\t\tPROJECT_ID = projectId,\n\t\tTREQ_ID = requisitionId,\n\t\tSOW_DETAIL_ID = sowDetailId,\n\t\tCMS_DETAIL_ID = cmsDetailId,\n\t\tRESOURCE_ID = uid,\n\t\tALC_ID = alcId,\n\t\tBUCKET_ID = bucketId,\n\t\tLOAD_TIMESTAMP = loadtimestamp\n\t)) ~> sink1"
+		}
+	}
+}

@@ -1,0 +1,479 @@
+{
+	"name": "Allocation",
+	"properties": {
+		"activities": [
+			{
+				"name": "allocation",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "alcId",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['alcId']"
+								}
+							},
+							{
+								"source": {
+									"name": "alcEndDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"path": "$['alcEndDate']"
+								}
+							},
+							{
+								"source": {
+									"name": "alcFte",
+									"type": "Decimal"
+								},
+								"sink": {
+									"path": "$['alcFte']"
+								}
+							},
+							{
+								"source": {
+									"name": "alcStartDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"path": "$['alcStartDate']"
+								}
+							},
+							{
+								"source": {
+									"name": "alcStatus",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['alcStatus']"
+								}
+							},
+							{
+								"source": {
+									"name": "alcType",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['alcType']"
+								}
+							},
+							{
+								"source": {
+									"name": "comments",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['comments']"
+								}
+							},
+							{
+								"source": {
+									"name": "createdBy",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['createdBy']"
+								}
+							},
+							{
+								"source": {
+									"name": "createdDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"path": "$['createdDate']"
+								}
+							},
+							{
+								"source": {
+									"name": "modifiedBy",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['modifiedBy']"
+								}
+							},
+							{
+								"source": {
+									"name": "modifiedDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"path": "$['modifiedDate']"
+								}
+							},
+							{
+								"source": {
+									"name": "projectId",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['projectId']"
+								}
+							},
+							{
+								"source": {
+									"name": "requisitionId",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['requisitionId']"
+								}
+							},
+							{
+								"source": {
+									"name": "uid",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['uid']"
+								}
+							},
+							{
+								"source": {
+									"name": "cmsDetailId",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['cmsDetailId']"
+								}
+							},
+							{
+								"source": {
+									"name": "sowDetailId",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['sowDetailId']"
+								}
+							},
+							{
+								"source": {
+									"name": "bucketId",
+									"type": "Int32"
+								},
+								"sink": {
+									"path": "$['bucketId']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "allocation",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "blob_allocation",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "monthly_allocation",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "allocation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "monthlyAlcId",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 1
+								}
+							},
+							{
+								"source": {
+									"name": "alcEndDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"type": "DateTime",
+									"ordinal": 2
+								}
+							},
+							{
+								"source": {
+									"name": "alcFte",
+									"type": "Decimal"
+								},
+								"sink": {
+									"type": "Decimal",
+									"ordinal": 3
+								}
+							},
+							{
+								"source": {
+									"name": "alcHrs",
+									"type": "Decimal"
+								},
+								"sink": {
+									"type": "Decimal",
+									"ordinal": 4
+								}
+							},
+							{
+								"source": {
+									"name": "alcStartDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"type": "DateTime",
+									"ordinal": 5
+								}
+							},
+							{
+								"source": {
+									"name": "alcType",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 6
+								}
+							},
+							{
+								"source": {
+									"name": "comments",
+									"type": "String"
+								},
+								"sink": {
+									"type": "String",
+									"ordinal": 7
+								}
+							},
+							{
+								"source": {
+									"name": "createdBy",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 8
+								}
+							},
+							{
+								"source": {
+									"name": "createdDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"type": "DateTime",
+									"ordinal": 9
+								}
+							},
+							{
+								"source": {
+									"name": "modifiedBy",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 10
+								}
+							},
+							{
+								"source": {
+									"name": "modifiedDate",
+									"type": "DateTime"
+								},
+								"sink": {
+									"type": "DateTime",
+									"ordinal": 11
+								}
+							},
+							{
+								"source": {
+									"name": "prdId",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 12
+								}
+							},
+							{
+								"source": {
+									"name": "prdMonth",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 13
+								}
+							},
+							{
+								"source": {
+									"name": "prdName",
+									"type": "String"
+								},
+								"sink": {
+									"type": "String",
+									"ordinal": 14
+								}
+							},
+							{
+								"source": {
+									"name": "prdYear",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 15
+								}
+							},
+							{
+								"source": {
+									"name": "projectId",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 16
+								}
+							},
+							{
+								"source": {
+									"name": "requisitionId",
+									"type": "String"
+								},
+								"sink": {
+									"type": "String",
+									"ordinal": 17
+								}
+							},
+							{
+								"source": {
+									"name": "sowDetailId",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 18
+								}
+							},
+							{
+								"source": {
+									"name": "uid",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 19
+								}
+							},
+							{
+								"source": {
+									"name": "alcId",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 20
+								}
+							},
+							{
+								"source": {
+									"name": "bucketId",
+									"type": "Int32"
+								},
+								"sink": {
+									"type": "Int32",
+									"ordinal": 21
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "monthly_allocation",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "blob_csv_monthly_allocation",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Infobiz"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-10-04T13:48:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

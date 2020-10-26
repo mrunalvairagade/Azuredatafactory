@@ -1,0 +1,164 @@
+{
+	"name": "sowdetails",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Infobiz96",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "sowDetailId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "amount",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "associateLevelId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "billableRate",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "cityId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "clientRole",
+				"type": "varchar"
+			},
+			{
+				"name": "comments",
+				"type": "varchar"
+			},
+			{
+				"name": "cost",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "countryId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createdBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createdDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "expectedBillability",
+				"type": "decimal",
+				"precision": 6,
+				"scale": 4
+			},
+			{
+				"name": "expectedDays",
+				"type": "decimal",
+				"precision": 6,
+				"scale": 2
+			},
+			{
+				"name": "isBillable",
+				"type": "bit"
+			},
+			{
+				"name": "modifiedBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "modifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "reasonForCancellation",
+				"type": "varchar"
+			},
+			{
+				"name": "resourceName",
+				"type": "varchar"
+			},
+			{
+				"name": "roleId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sharepointAccountId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sowRoleEndDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "sowRoleStartDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "status",
+				"type": "varchar"
+			},
+			{
+				"name": "unitId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sowId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sowMilestoneId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "probability",
+				"type": "varchar"
+			},
+			{
+				"name": "serviceLineId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "recoveryFlag",
+				"type": "bit"
+			},
+			{
+				"name": "cancellationReason",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sowDetail"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

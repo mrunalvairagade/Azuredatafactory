@@ -1,0 +1,122 @@
+{
+	"name": "monthly_allocation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Infobiz96",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "monthlyAlcId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "alcEndDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "alcFte",
+				"type": "decimal",
+				"precision": 19,
+				"scale": 2
+			},
+			{
+				"name": "alcHrs",
+				"type": "decimal",
+				"precision": 19,
+				"scale": 2
+			},
+			{
+				"name": "alcStartDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "alcType",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "comments",
+				"type": "varchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createdDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "modifiedBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "modifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "prdId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "prdMonth",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "prdName",
+				"type": "varchar"
+			},
+			{
+				"name": "prdYear",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "projectId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "requisitionId",
+				"type": "varchar"
+			},
+			{
+				"name": "sowDetailId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "uid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "alcId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "bucketId",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "monthly_allocation"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,175 @@
+{
+	"name": "project",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Infomasters96",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "itemId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "accountId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "assignedToId",
+				"type": "varchar"
+			},
+			{
+				"name": "billingTypeId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "billingUnitId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cancelReason",
+				"type": "varchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createdDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "executionUnitId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "infoCeptsProjectCode",
+				"type": "varchar"
+			},
+			{
+				"name": "modifiedBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "modifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "notes",
+				"type": "varchar"
+			},
+			{
+				"name": "ownersId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "plannersId",
+				"type": "varchar"
+			},
+			{
+				"name": "portfolioId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "projectClosedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "projectActualStartDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "projectEnd",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "projectManagersId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "projectStart",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "projectSubTypeId",
+				"type": "varchar"
+			},
+			{
+				"name": "projectTypeId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sowStatus",
+				"type": "varchar"
+			},
+			{
+				"name": "state",
+				"type": "varchar"
+			},
+			{
+				"name": "technology",
+				"type": "varchar"
+			},
+			{
+				"name": "title",
+				"type": "varchar"
+			},
+			{
+				"name": "deProjectType",
+				"type": "varchar"
+			},
+			{
+				"name": "parentProjectId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deCoverageComment",
+				"type": "varchar"
+			},
+			{
+				"name": "isUnderDECoverage",
+				"type": "varchar"
+			},
+			{
+				"name": "isGeneric",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "COA_Project",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "programManagerId",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "project"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

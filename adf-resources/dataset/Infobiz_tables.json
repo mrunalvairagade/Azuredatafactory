@@ -1,0 +1,16 @@
+{
+	"name": "Infobiz_tables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Infobiz96",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Infobiz"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

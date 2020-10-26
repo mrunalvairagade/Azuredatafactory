@@ -1,0 +1,74 @@
+{
+	"name": "blob_monthly_allocation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "infobiz"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"alcId": {
+					"type": "integer"
+				},
+				"alcEndDate": {
+					"type": "string"
+				},
+				"alcFte": {
+					"type": "number"
+				},
+				"alcStartDate": {
+					"type": "string"
+				},
+				"alcStatus": {
+					"type": "string"
+				},
+				"alcType": {
+					"type": "integer"
+				},
+				"comments": {
+					"type": "string"
+				},
+				"createdBy": {
+					"type": "integer"
+				},
+				"createdDate": {
+					"type": "string"
+				},
+				"modifiedBy": {
+					"type": "null"
+				},
+				"modifiedDate": {
+					"type": "null"
+				},
+				"projectId": {
+					"type": "integer"
+				},
+				"requisitionId": {
+					"type": "string"
+				},
+				"uid": {
+					"type": "integer"
+				},
+				"cmsDetailId": {
+					"type": "null"
+				},
+				"sowDetailId": {
+					"type": "null"
+				},
+				"bucketId": {
+					"type": "integer"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

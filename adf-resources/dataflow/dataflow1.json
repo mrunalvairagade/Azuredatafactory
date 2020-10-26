@@ -1,0 +1,42 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "blob_project",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable_project",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable_project2",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "DerivedColumn2"
+				}
+			],
+			"script": "source(output(\n\t\tCOA_Project as short,\n\t\taccountId as short,\n\t\tassignedToId as string,\n\t\tbillingTypeId as short,\n\t\tbillingUnitId as short,\n\t\tcancelReason as string,\n\t\tcreatedBy as short,\n\t\tcreatedDate as string,\n\t\tdeCoverageComment as string,\n\t\tdeProjectType as string,\n\t\texecutionUnitId as short,\n\t\tinfoCeptsProjectCode as string,\n\t\tisGeneric as string,\n\t\tisUnderDECoverage as string,\n\t\titemId as short,\n\t\tmodifiedBy as short,\n\t\tmodifiedDate as string,\n\t\tnotes as string,\n\t\townersId as short,\n\t\tparentProjectId as short,\n\t\tplannersId as string,\n\t\tportfolioId as short,\n\t\tprogramManagerId as short,\n\t\tprojectActualStartDate as string,\n\t\tprojectClosedDate as string,\n\t\tprojectEnd as string,\n\t\tprojectManagersId as short,\n\t\tprojectStart as string,\n\t\tprojectSubTypeId as string,\n\t\tprojectTypeId as short,\n\t\tsowStatus as string,\n\t\tstate as string,\n\t\ttechnology as string,\n\t\ttitle as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 derive(abcd = 123) ~> DerivedColumn1\nsource1 derive(fgh = 890) ~> DerivedColumn2\nDerivedColumn1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCOA_Project,\n\t\taccountId,\n\t\tassignedToId,\n\t\tbillingTypeId,\n\t\tbillingUnitId,\n\t\tcancelReason,\n\t\tcreatedBy,\n\t\tcreatedDate,\n\t\tdeCoverageComment,\n\t\tdeProjectType,\n\t\texecutionUnitId,\n\t\tinfoCeptsProjectCode,\n\t\tisGeneric,\n\t\tisUnderDECoverage,\n\t\titemId,\n\t\tmodifiedBy,\n\t\tmodifiedDate,\n\t\tnotes,\n\t\townersId,\n\t\tparentProjectId = COA_Project,\n\t\tplannersId,\n\t\tportfolioId,\n\t\tprogramManagerId,\n\t\tprojectActualStartDate,\n\t\tprojectClosedDate,\n\t\tprojectEnd,\n\t\tprojectManagersId,\n\t\tprojectStart,\n\t\tprojectSubTypeId,\n\t\tprojectTypeId,\n\t\tsowStatus,\n\t\tstate,\n\t\ttechnology,\n\t\ttitle = accountId,\n\t\tabcd\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1\nDerivedColumn2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink2"
+		}
+	}
+}

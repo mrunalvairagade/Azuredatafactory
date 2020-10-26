@@ -1,0 +1,101 @@
+{
+	"name": "allocation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Infobiz96",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "alcId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "alcEndDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "alcFte",
+				"type": "decimal",
+				"precision": 19,
+				"scale": 2
+			},
+			{
+				"name": "alcStartDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "alcStatus",
+				"type": "varchar"
+			},
+			{
+				"name": "alcType",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "comments",
+				"type": "varchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createdDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "modifiedBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "modifiedDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "projectId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "requisitionId",
+				"type": "varchar"
+			},
+			{
+				"name": "uid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cmsDetailId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sowDetailId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "bucketId",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "allocation"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
